@@ -70,7 +70,12 @@ namespace TenderTummiesAPI.Controllers
                 //will search the _context.Child for an entry that has the id we are looking for
                 //if found, will return that child
                 //if not found will return 404. 
-                Child child = _context.Child.Single(m => m.ChildID == id);
+                Child child = _context.Child
+                    .Include("Triggers")
+                    .Include("Safes")
+                    .Include("Trials")
+                    .Include("Reactions")
+                    .Single(m => m.ChildID == id);
 
                 if (child == null)
                 {
