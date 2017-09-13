@@ -48,7 +48,7 @@ namespace TenderTummiesAPI.Data
                 .HasDefaultValueSql("strftime('%Y-%m-%d')");
             modelBuilder.Entity<TrialEvent>()
                 .Property(c => c.DateTime)
-                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')"); 
+                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
         }
 
     }

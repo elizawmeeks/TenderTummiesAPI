@@ -114,7 +114,7 @@ namespace TenderTummiesAPI.Data
                         Severity = "High"
                     },
                     new Trigger{
-                        Food = "Eggs",
+                        Food = "Egg",
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
@@ -915,7 +915,7 @@ namespace TenderTummiesAPI.Data
                 }
                 // Saves the additions to the database
                 context.SaveChanges();
-
+                
                 // Creating new instances of reactionTrigger
                 var reactionTriggers = new ReactionTrigger[]
                 {

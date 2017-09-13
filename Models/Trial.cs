@@ -12,9 +12,13 @@ namespace TenderTummiesAPI.Models
         public int TrialID { get; set; }
 
         [Required]
-        public int ChildID {get; set;}
+        public int ChildID { get; set;}
 
-        public int TriggerID { get; set; }
+        public virtual Child Child { get; set; }
+
+        public Nullable<int> TriggerID { get; set; }
+
+        public virtual Trigger Trigger { get; set; }
 
         [Required]
         public string Food { get; set; }

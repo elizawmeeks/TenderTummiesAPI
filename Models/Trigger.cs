@@ -16,6 +16,8 @@ namespace TenderTummiesAPI.Models
 
         [Required]
         public int ChildID { get; set; }
+
+        public virtual Child Child { get; set; }
         
         [Required]
         public string Severity { get; set; }

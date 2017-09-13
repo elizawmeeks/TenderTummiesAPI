@@ -14,8 +14,12 @@ namespace TenderTummiesAPI.Models
         [Required]
         public int ReactionEventID { get; set; }
 
+        public virtual ReactionEvent ReactionEvent { get; set; }
+
         [Required]
         public int SymptomID { get; set; }
+
+        public virtual Symptom Symptom { get; set; }
 
     }
 }

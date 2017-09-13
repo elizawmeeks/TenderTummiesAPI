@@ -14,7 +14,11 @@ namespace TenderTummiesAPI.Models
         [Required]
         public int ReactionID { get; set; }
 
-        public int TrialID { get; set; }
+        public virtual Reaction Reaction { get; set; }
+
+        public Nullable<int> TrialID { get; set; }
+
+        public virtual Trial Trial { get; set; }
         
         [Required]
         public bool Acute { get; set; }

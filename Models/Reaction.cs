@@ -14,8 +14,12 @@ namespace TenderTummiesAPI.Models
         [Required]
         public int ChildID {get; set;}
 
+        public virtual Child Child {get; set; }
+
         [Required]
         public int IngestionID { get; set; }
+
+        public virtual Ingestion Ingestion { get; set; }
 
         [Required]
         public string FoodType { get; set; }

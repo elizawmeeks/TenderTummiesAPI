@@ -12,7 +12,9 @@ namespace TenderTummiesAPI.Models
         public int TrialEventID { get; set; }
 
         [Required]
-        public int TrialID {get; set;}
+        public int TrialID { get; set;}
+
+        public virtual Trial Trial { get; set; }
 
         [Required]
         public string Quantity { get; set; }

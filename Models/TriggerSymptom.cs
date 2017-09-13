@@ -14,8 +14,12 @@ namespace TenderTummiesAPI.Models
         [Required]
         public int TriggerID { get; set; }
 
+        public virtual Trigger Trigger { get; set; }
+
         [Required]
         public int SymptomID { get; set; }
+
+        public virtual Symptom Symptom { get; set; }
         
         [Required]
         public bool Acute { get; set; }
