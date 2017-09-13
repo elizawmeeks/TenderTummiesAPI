@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    // Model for events in trials. Includes the trial it's connected to, the quantity and food type, and the date/time.
     public class TrialEvent
     {
         [Key]

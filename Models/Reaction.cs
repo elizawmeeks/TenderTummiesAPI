@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    // Model for Reaction. Includes child, ingestion, foodtype, start/end dates and description.
     public class Reaction
     {
         [Key]

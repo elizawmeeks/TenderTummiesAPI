@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    // Trial model. Includes child, trigger, food, start/end dates, and whether or not the child passed.
     public class Trial
     {
         [Key]

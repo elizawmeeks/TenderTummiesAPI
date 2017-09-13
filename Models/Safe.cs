@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    // Safe model. Includes child and the food that is safe.
     public class Safe
     {
         [Key]

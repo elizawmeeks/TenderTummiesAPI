@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    //Trigger model. Includes food, child, and severity of trigger.
     public class Trigger
     {
         [Key]

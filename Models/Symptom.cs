@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    //Symptom model. Includes name of the symptom.
     public class Symptom
     {
         [Key]

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    // Model for Reaction events. Includes reaction, trial (if relevant), acute/chronic, description and date/time.
     public class ReactionEvent
     {
         [Key]

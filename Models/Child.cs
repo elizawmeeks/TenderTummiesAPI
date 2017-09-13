@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    // Model for Child. Includes UserID, name, weight, gender and age.
     public class Child
     {
         [Key]

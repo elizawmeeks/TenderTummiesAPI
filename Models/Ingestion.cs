@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    // Model for Ingestion. Includes type of ingestion, foreign key relationship with reactions.
     public class Ingestion
     {
         [Key]

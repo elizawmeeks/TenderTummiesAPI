@@ -5,7 +5,8 @@ using System.ComponentModel.DataAnnotations;
  
 namespace TenderTummiesAPI.Models
 {
-
+    // Model for Reaction trigger, to list the triggers in a certain reaction. 
+    //Includes trigger and reaction that it's connected to.
     public class ReactionTrigger
     {
         [Key]
