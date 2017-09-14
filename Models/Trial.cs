@@ -21,8 +21,9 @@ namespace TenderTummiesAPI.Models
         public virtual Trigger Trigger { get; set; }
 
         [Required]
-        public string Food { get; set; }
-
+        public int FoodID { get; set; }
+        public virtual Food Food { get; set; }
+        
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]

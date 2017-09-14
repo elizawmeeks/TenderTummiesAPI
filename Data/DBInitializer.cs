@@ -100,161 +100,413 @@ namespace TenderTummiesAPI.Data
                 // Saves the symptoms to the database
                 context.SaveChanges();
 
+                var food = new Food[]
+                {
+                    new Food{
+                        Name = "Dairy"
+                    },
+                    new Food{
+                        Name = "Soy"
+                    },
+                    new Food{
+                        Name = "Egg"
+                    },
+                    new Food{
+                        Name = "Almond"
+                    },
+                    new Food{
+                        Name = "Cashew"
+                    },
+                    new Food{
+                        Name = "Macademia Nut"
+                    },
+                    new Food{
+                        Name = "Walnut"
+                    },
+                    new Food{
+                        Name = "Pine Nut"
+                    },
+                    new Food{
+                        Name = "Rice"
+                    },
+                    new Food{
+                        Name = "Barley"
+                    },
+                    new Food{
+                        Name = "Wheat"
+                    },
+                    new Food{
+                        Name = "Oat"
+                    },
+                    new Food{
+                        Name = "Watermelon"
+                    },
+                    new Food{
+                        Name = "Honeydew"
+                    },
+                    new Food{
+                        Name = "Cantaloupe"
+                    },
+                    new Food{
+                        Name = "Orange"
+                    },
+                    new Food{
+                        Name = "Mandarin Orange"
+                    },
+                    new Food{
+                        Name = "Clementine"
+                    },
+                    new Food{
+                        Name = "Grapefruit"
+                    },
+                    new Food{
+                        Name = "Peanut"
+                    },
+                    new Food{
+                        Name = "Green Bean"
+                    },
+                    new Food{
+                        Name = "Pea"
+                    },
+                    new Food{
+                        Name = "Kidney Bean"
+                    },
+                    new Food{
+                        Name = "Red Bean"
+                    },
+                    new Food{
+                        Name = "Black Bean"
+                    },
+                    new Food{
+                        Name = "Navy Bean"
+                    },
+                    new Food{
+                        Name = "Black Eyed Pea"
+                    },
+                    new Food{
+                        Name = "Chick Pea"
+                    },
+                    new Food{
+                        Name = "Chicken"
+                    },
+                    new Food{
+                        Name = "Turkey"
+                    },
+                    new Food{
+                        Name = "Anchovy"
+                    },
+                    new Food{
+                        Name = "Hemp"
+                    },
+                    new Food{
+                        Name = "Pear"
+                    },
+                    new Food{
+                        Name = "Peach"
+                    },
+                    new Food{
+                        Name = "Strawberry"
+                    },
+                    new Food{
+                        Name = "Raspberry"
+                    },
+                    new Food{
+                        Name = "Blueberry"
+                    },
+                    new Food{
+                        Name = "Blackberry"
+                    },
+                    new Food{
+                        Name = "Apple"
+                    },
+                    new Food{
+                        Name = "Banana"
+                    },
+                    new Food{
+                        Name = "Apricot"
+                    },
+                    new Food{
+                        Name = "Grape"
+                    },
+                    new Food{
+                        Name = "Lemon"
+                    },
+                    new Food{
+                        Name = "Lime"
+                    },
+                    new Food{
+                        Name = "Tomato"
+                    },
+                    new Food{
+                        Name = "Plum"
+                    },
+                    new Food{
+                        Name = "Cherry"
+                    },
+                    new Food{
+                        Name = "Avocado"
+                    },
+                    new Food{
+                        Name = "Corn"
+                    },
+                    new Food{
+                        Name = "Pork"
+                    },
+                    new Food{
+                        Name = "Beef"
+                    },
+                    new Food{
+                        Name = "Lamb"
+                    },
+                    new Food{
+                        Name = "Sunflower Seed"
+                    },
+                    new Food{
+                        Name = "Spinach"
+                    },
+                    new Food{
+                        Name = "Onion"
+                    },
+                    new Food{
+                        Name = "Potato"
+                    },
+                    new Food{
+                        Name = "Carrot"
+                    },
+                    new Food{
+                        Name = "Celery"
+                    },
+                    new Food{
+                        Name = "Sweet Potato"
+                    },
+                    new Food{
+                        Name = "Turnip"
+                    },
+                    new Food{
+                        Name = "Collared Greens"
+                    },
+                    new Food{
+                        Name = "Olive"
+                    },
+                    new Food{
+                        Name = "Broccoli"
+                    },
+                    new Food{
+                        Name = "Asparagus"
+                    },
+                    new Food{
+                        Name = "Kale"
+                    },
+                    new Food{
+                        Name = "Arugula"
+                    },
+                    new Food{
+                        Name = "Lettuce"
+                    },
+                    new Food{
+                        Name = "Bell Pepper"
+                    },
+                    new Food{
+                        Name = "Cabbage"
+                    },
+                    new Food{
+                        Name = "Cauliflower"
+                    },
+                    new Food{
+                        Name = "Safflower Oil"
+                    },
+                    new Food{
+                        Name = "Grapeseed Oil"
+                    },
+                    new Food{
+                        Name = "Cottonseed Oil"
+                    },
+                    new Food{
+                        Name = "Rapeseed Oil"
+                    },
+                    new Food{
+                        Name = "Canola Oil"
+                    },
+                    new Food{
+                        Name = "Tuna"
+                    },
+                    new Food{
+                        Name = "Salmon"
+                    },
+                    new Food{
+                        Name = "Tilapia"
+                    },
+                    new Food{
+                        Name = "Trout"
+                    },
+                    new Food{
+                        Name = "Venison"
+                    },
+                    new Food{
+                        Name = "Duck"
+                    }
+                };
+
+                foreach (Food f in food){
+                    context.Food.Add(f);
+                }
+                context.SaveChanges();
+
                 // Creating new instances of trigger
                 var triggers = new Trigger[]
                 {
                     new Trigger{
-                        Food = "Dairy",
+                        FoodID = food.Single(f => f.Name == "Dairy").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "High"
                     },
                     new Trigger{
-                        Food = "Soy",
+                        FoodID = food.Single(f => f.Name == "Soy").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "High"
                     },
                     new Trigger{
-                        Food = "Egg",
+                        FoodID = food.Single(f => f.Name == "Egg").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Almond",
+                        FoodID = food.Single(f => f.Name == "Almond").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Cashew",
+                        FoodID = food.Single(f => f.Name == "Cashew").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Macademia Nut",
+                        FoodID = food.Single(f => f.Name == "Macademia Nut").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Walnut",
+                        FoodID = food.Single(f => f.Name == "Walnut").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Pine Nut",
+                        FoodID = food.Single(f => f.Name == "Pine Nut").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Rice",
+                        FoodID = food.Single(f => f.Name == "Rice").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Barley",
+                        FoodID = food.Single(f => f.Name == "Barley").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Wheat",
+                        FoodID = food.Single(f => f.Name == "Wheat").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Oat",
+                        FoodID = food.Single(f => f.Name == "Oat").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Watermelon",
+                        FoodID = food.Single(f => f.Name == "Watermelon").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Honeydew",
+                        FoodID = food.Single(f => f.Name == "Honeydew").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Cantaloupe",
+                        FoodID = food.Single(f => f.Name == "Cantaloupe").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Orange",
+                        FoodID = food.Single(f => f.Name == "Orange").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Mandarin Orange",
+                        FoodID = food.Single(f => f.Name == "Mandarin Orange").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Clementine",
+                        FoodID = food.Single(f => f.Name == "Clementine").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Grapefruit",
+                        FoodID = food.Single(f => f.Name == "Grapefruit").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Peanut",
+                        FoodID = food.Single(f => f.Name == "Peanut").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Green Bean",
+                        FoodID = food.Single(f => f.Name == "Green Bean").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Pea",
+                        FoodID = food.Single(f => f.Name == "Pea").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Kidney Bean",
+                        FoodID = food.Single(f => f.Name == "Kidney Bean").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Black Bean",
+                        FoodID = food.Single(f => f.Name == "Black Bean").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Navy Bean",
+                        FoodID = food.Single(f => f.Name == "Navy Bean").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Black Eyed Pea",
+                        FoodID = food.Single(f => f.Name == "Black Eyed Pea").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Chick Pea",
+                        FoodID = food.Single(f => f.Name == "Chick Pea").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Chicken",
+                        FoodID = food.Single(f => f.Name == "Chicken").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Turkey",
+                        FoodID = food.Single(f => f.Name == "Turkey").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Anchovy",
+                        FoodID = food.Single(f => f.Name == "Anchovy").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     },
                     new Trigger{
-                        Food = "Hemp",
+                        FoodID = food.Single(f => f.Name == "Hemp").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID,
                         Severity = "Medium"
                     }
@@ -271,183 +523,171 @@ namespace TenderTummiesAPI.Data
                 var safes = new Safe[]
                 {
                     new Safe{
-                        Food = "Pear",
+                        FoodID = food.Single(f => f.Name == "Pear").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Peach",
+                        FoodID = food.Single(f => f.Name == "Peach").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Raspberry",
+                        FoodID = food.Single(f => f.Name == "Raspberry").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Strawberry",
+                        FoodID = food.Single(f => f.Name == "Strawberry").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Bluberry",
+                        FoodID = food.Single(f => f.Name == "Blueberry").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Blackberry",
+                        FoodID = food.Single(f => f.Name == "Blackberry").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Apple",
+                        FoodID = food.Single(f => f.Name == "Apple").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Banana",
+                        FoodID = food.Single(f => f.Name == "Banana").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Apricot",
+                        FoodID = food.Single(f => f.Name == "Apricot").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Grape",
+                        FoodID = food.Single(f => f.Name == "Grape").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Lemon",
+                        FoodID = food.Single(f => f.Name == "Lemon").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Lime",
+                        FoodID = food.Single(f => f.Name == "Lime").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Tomato",
+                        FoodID = food.Single(f => f.Name == "Tomato").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Plum",
+                        FoodID = food.Single(f => f.Name == "Plum").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Cherry",
+                        FoodID = food.Single(f => f.Name == "Cherry").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Avocado",
+                        FoodID = food.Single(f => f.Name == "Avocado").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Corn",
+                        FoodID = food.Single(f => f.Name == "Corn").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Pork",
+                        FoodID = food.Single(f => f.Name == "Pork").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Beef",
+                        FoodID = food.Single(f => f.Name == "Beef").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Lamb",
+                        FoodID = food.Single(f => f.Name == "Lamb").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Sunflower Seed",
+                        FoodID = food.Single(f => f.Name == "Sunflower Seed").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Spinach",
+                        FoodID = food.Single(f => f.Name == "Spinach").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Onion",
+                        FoodID = food.Single(f => f.Name == "Onion").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Potato",
+                        FoodID = food.Single(f => f.Name == "Potato").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Carrot",
+                        FoodID = food.Single(f => f.Name == "Carrot").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Celery",
+                        FoodID = food.Single(f => f.Name == "Celery").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Sweet Potato",
+                        FoodID = food.Single(f => f.Name == "Sweet Potato").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Turnip",
+                        FoodID = food.Single(f => f.Name == "Turnip").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Collared Greens",
+                        FoodID = food.Single(f => f.Name == "Collared Greens").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Olive",
+                        FoodID = food.Single(f => f.Name == "Olive").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Broccoli",
+                        FoodID = food.Single(f => f.Name == "Broccoli").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Asparagus",
+                        FoodID = food.Single(f => f.Name == "Asparagus").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Kale",
+                        FoodID = food.Single(f => f.Name == "Kale").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Arugula",
+                        FoodID = food.Single(f => f.Name == "Arugula").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Lettuce",
+                        FoodID = food.Single(f => f.Name == "Lettuce").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Bell Pepper",
+                        FoodID = food.Single(f => f.Name == "Bell Pepper").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Cabbage",
+                        FoodID = food.Single(f => f.Name == "Cabbage").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Cauliflower",
+                        FoodID = food.Single(f => f.Name == "Cauliflower").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Safflower Oil",
+                        FoodID = food.Single(f => f.Name == "Safflower Oil").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Grapeseed Oil",
+                        FoodID = food.Single(f => f.Name == "Grapeseed Oil").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Cottonseed Oil",
+                        FoodID = food.Single(f => f.Name == "Cottonseed Oil").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     },
                     new Safe{
-                        Food = "Sugar",
-                        ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
-                    },
-                    new Safe{
-                        Food = "Salt",
-                        ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
-                    },
-                    new Safe{
-                        Food = "Pepper",
-                        ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
-                    },
-                    new Safe{
-                        Food = "Herbs",
+                        FoodID = food.Single(f => f.Name == "Canola Oil").FoodID,
                         ChildID = children.Single(s => s.FirstName == "Sherman").ChildID
                     }
                 };
@@ -463,385 +703,385 @@ namespace TenderTummiesAPI.Data
                 var triggerSymptoms = new TriggerSymptom[]
                 {
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Soy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Soy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Vomit").SymptomID,
                         Acute = true,
                         Chronic = false
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Soy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Soy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Soy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Soy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Body Temperature Change").SymptomID,
                         Acute = true,
                         Chronic = false
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Soy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Soy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Dairy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Dairy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Vomit").SymptomID,
                         Acute = true,
                         Chronic = false
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Dairy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Dairy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Dairy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Dairy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Body Temperature Change").SymptomID,
                         Acute = true,
                         Chronic = false
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Dairy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Dairy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Almond").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Almond").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Almond").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Almond").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Cashew").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Cashew").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Cashew").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Cashew").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Macademia Nut").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Macademia Nut").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Macademia Nut").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Macademia Nut").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Walnut").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Walnut").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Walnut").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Walnut").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Pine Nut").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Pine Nut").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Pine Nut").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Pine Nut").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Rice").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Rice").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Rice").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Rice").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Barley").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Barley").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Barley").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Barley").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Wheat").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Wheat").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Wheat").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Wheat").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Oat").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Oat").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Oat").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Oat").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Watermelon").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Watermelon").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Watermelon").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Watermelon").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Honeydew").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Honeydew").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Honeydew").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Honeydew").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Cantaloupe").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Cantaloupe").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Cantaloupe").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Cantaloupe").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Orange").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Orange").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Orange").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Orange").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Mandarin Orange").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Mandarin Orange").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Mandarin Orange").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Mandarin Orange").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Clementine").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Clementine").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Clementine").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Clementine").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Grapefruit").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Grapefruit").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Grapefruit").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Grapefruit").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Peanut").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Peanut").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Peanut").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Peanut").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Green Bean").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Green Bean").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Green Bean").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Green Bean").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Pea").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Pea").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Pea").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Pea").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Kidney Bean").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Kidney Bean").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Kidney Bean").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Kidney Bean").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Black Bean").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Black Bean").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Black Bean").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Black Bean").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Navy Bean").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Navy Bean").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Navy Bean").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Navy Bean").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Black Eyed Pea").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Black Eyed Pea").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Black Eyed Pea").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Black Eyed Pea").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Chick Pea").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Chick Pea").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Chick Pea").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Chick Pea").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Chicken").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Chicken").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Chicken").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Chicken").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Turkey").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Turkey").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Turkey").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Turkey").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Anchovy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Anchovy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Anchovy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Anchovy").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Hemp").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Hemp").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Diarrhea").SymptomID,
                         Acute = true,
                         Chronic = true
                     },
                     new TriggerSymptom{
-                        TriggerID = triggers.Single(t => t.Food == "Hemp").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Hemp").FoodID).TriggerID,
                         SymptomID = symptoms.Single(s => s.Name == "Restless Sleep").SymptomID,
                         Acute = true,
                         Chronic = true
@@ -920,23 +1160,23 @@ namespace TenderTummiesAPI.Data
                 var reactionTriggers = new ReactionTrigger[]
                 {
                     new ReactionTrigger { 
-                        TriggerID = triggers.Single(t => t.Food == "Soy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Soy").FoodID).TriggerID,
                         ReactionID = reactions.Single(r => r.StartDate == new DateTime(2017, 8, 1)).ReactionID
                     },
                     new ReactionTrigger { 
-                        TriggerID = triggers.Single(t => t.Food == "Wheat").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Wheat").FoodID).TriggerID,
                         ReactionID = reactions.Single(r => r.StartDate == new DateTime(2017, 9, 9)).ReactionID
                     },
                     new ReactionTrigger { 
-                        TriggerID = triggers.Single(t => t.Food == "Egg").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Egg").FoodID).TriggerID,
                         ReactionID = reactions.Single(r => r.StartDate == new DateTime(2017, 9, 9)).ReactionID
                     },
                     new ReactionTrigger { 
-                        TriggerID = triggers.Single(t => t.Food == "Dairy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Dairy").FoodID).TriggerID,
                         ReactionID = reactions.Single(r => r.StartDate == new DateTime(2017, 9, 9)).ReactionID
                     },
                     new ReactionTrigger { 
-                        TriggerID = triggers.Single(t => t.Food == "Soy").TriggerID,
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Soy").FoodID).TriggerID,
                         ReactionID = reactions.Single(r => r.StartDate == new DateTime(2017, 9, 9)).ReactionID
                     }
                 };
@@ -953,15 +1193,15 @@ namespace TenderTummiesAPI.Data
                 {
                     new Trial { 
                         ChildID = children.Single(c => c.FirstName == "Sherman").ChildID,
-                        Food = "Orange",
+                        FoodID = food.Single(f => f.Name == "Orange").FoodID,
                         StartDate = new DateTime(2015, 5, 2),
                         EndDate = new DateTime(2015, 5, 5),
                         Pass = false,
-                        TriggerID = triggers.Single(t => t.Food == "Orange").TriggerID
+                        TriggerID = triggers.Single(t => t.FoodID == food.Single(f => f.Name == "Orange").FoodID).TriggerID
                     },
                     new Trial { 
                         ChildID = children.Single(c => c.FirstName == "Sherman").ChildID,
-                        Food = "Quinoa",
+                        FoodID = food.Single(f => f.Name == "Quinoa").FoodID,
                         StartDate = new DateTime(2017, 9, 2)
                     }
                 };
@@ -978,7 +1218,7 @@ namespace TenderTummiesAPI.Data
                 {
                     new ReactionEvent {
                         ReactionID = reactions.Single(r => r.StartDate == new DateTime(2017, 9, 2)).ReactionID,
-                        TrialID = trials.Single(t => t.Food == "Quinoa").TrialID,
+                        TrialID = trials.Single(t => t.FoodID == food.Single(f => f.Name == "Quinoa").FoodID).TrialID,
                         Acute = false,
                         Chronic = true,
                         Description = "Sherman woke up about two hours after bedtime",
@@ -1039,7 +1279,7 @@ namespace TenderTummiesAPI.Data
                 var trialEvents = new TrialEvent[]
                 {
                     new TrialEvent {
-                        TrialID = trials.Single(t => t.Food == "Quinoa").TrialID,
+                        TrialID = trials.Single(t => t.FoodID == food.Single(f => f.Name == "Quinoa").FoodID).TrialID,
                         Quantity = "1 cup",
                         FoodType = "Quinoa with pepper and olive oil",
                         DateTime = new DateTime(2017, 9, 9, 17, 00, 00)
