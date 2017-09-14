@@ -73,8 +73,6 @@ namespace TenderTummiesAPI.Controllers
                 Child child = _context.Child
                     .Include("Triggers")
                     .Include("Safes")
-                    .Include("Trials")
-                    .Include("Reactions")
                     .Single(m => m.ChildID == id);
 
                 if (child == null)
