@@ -344,6 +344,9 @@ namespace TenderTummiesAPI.Data
                     },
                     new Food{
                         Name = "Duck"
+                    },
+                    new Food{
+                        Name = "Quinoa"
                     }
                 };
 

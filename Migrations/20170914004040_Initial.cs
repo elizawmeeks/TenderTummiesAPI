@@ -28,6 +28,19 @@ namespace TenderTummiesAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Food",
+                columns: table => new
+                {
+                    FoodID = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Food", x => x.FoodID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ingestion",
                 columns: table => new
                 {
@@ -60,7 +73,7 @@ namespace TenderTummiesAPI.Migrations
                     SafeID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ChildID = table.Column<int>(nullable: false),
-                    Food = table.Column<string>(nullable: false)
+                    FoodID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,6 +84,12 @@ namespace TenderTummiesAPI.Migrations
                         principalTable: "Child",
                         principalColumn: "ChildID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Safe_Food_FoodID",
+                        column: x => x.FoodID,
+                        principalTable: "Food",
+                        principalColumn: "FoodID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,7 +99,7 @@ namespace TenderTummiesAPI.Migrations
                     TriggerID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ChildID = table.Column<int>(nullable: false),
-                    Food = table.Column<string>(nullable: false),
+                    FoodID = table.Column<int>(nullable: false),
                     Severity = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -91,6 +110,12 @@ namespace TenderTummiesAPI.Migrations
                         column: x => x.ChildID,
                         principalTable: "Child",
                         principalColumn: "ChildID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Trigger_Food_FoodID",
+                        column: x => x.FoodID,
+                        principalTable: "Food",
+                        principalColumn: "FoodID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -132,7 +157,7 @@ namespace TenderTummiesAPI.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ChildID = table.Column<int>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d')"),
-                    Food = table.Column<string>(nullable: false),
+                    FoodID = table.Column<int>(nullable: false),
                     Pass = table.Column<bool>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d')"),
                     TriggerID = table.Column<int>(nullable: true)
@@ -145,6 +170,12 @@ namespace TenderTummiesAPI.Migrations
                         column: x => x.ChildID,
                         principalTable: "Child",
                         principalColumn: "ChildID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Trial_Food_FoodID",
+                        column: x => x.FoodID,
+                        principalTable: "Food",
+                        principalColumn: "FoodID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Trial_Trigger_TriggerID",
@@ -332,9 +363,19 @@ namespace TenderTummiesAPI.Migrations
                 column: "ChildID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Safe_FoodID",
+                table: "Safe",
+                column: "FoodID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Trial_ChildID",
                 table: "Trial",
                 column: "ChildID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trial_FoodID",
+                table: "Trial",
+                column: "FoodID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trial_TriggerID",
@@ -350,6 +391,11 @@ namespace TenderTummiesAPI.Migrations
                 name: "IX_Trigger_ChildID",
                 table: "Trigger",
                 column: "ChildID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trigger_FoodID",
+                table: "Trigger",
+                column: "FoodID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TriggerSymptom_SymptomID",
@@ -399,6 +445,9 @@ namespace TenderTummiesAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Child");
+
+            migrationBuilder.DropTable(
+                name: "Food");
         }
     }
 }

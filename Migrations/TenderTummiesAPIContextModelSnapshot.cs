@@ -43,6 +43,19 @@ namespace TenderTummiesAPI.Migrations
                     b.ToTable("Child");
                 });
 
+            modelBuilder.Entity("TenderTummiesAPI.Models.Food", b =>
+                {
+                    b.Property<int>("FoodID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("FoodID");
+
+                    b.ToTable("Food");
+                });
+
             modelBuilder.Entity("TenderTummiesAPI.Models.Ingestion", b =>
                 {
                     b.Property<int>("IngestionID")
@@ -158,12 +171,13 @@ namespace TenderTummiesAPI.Migrations
 
                     b.Property<int>("ChildID");
 
-                    b.Property<string>("Food")
-                        .IsRequired();
+                    b.Property<int>("FoodID");
 
                     b.HasKey("SafeID");
 
                     b.HasIndex("ChildID");
+
+                    b.HasIndex("FoodID");
 
                     b.ToTable("Safe");
                 });
@@ -192,8 +206,7 @@ namespace TenderTummiesAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValueSql("strftime('%Y-%m-%d')");
 
-                    b.Property<string>("Food")
-                        .IsRequired();
+                    b.Property<int>("FoodID");
 
                     b.Property<bool>("Pass");
 
@@ -206,6 +219,8 @@ namespace TenderTummiesAPI.Migrations
                     b.HasKey("TrialID");
 
                     b.HasIndex("ChildID");
+
+                    b.HasIndex("FoodID");
 
                     b.HasIndex("TriggerID");
 
@@ -243,8 +258,7 @@ namespace TenderTummiesAPI.Migrations
 
                     b.Property<int>("ChildID");
 
-                    b.Property<string>("Food")
-                        .IsRequired();
+                    b.Property<int>("FoodID");
 
                     b.Property<string>("Severity")
                         .IsRequired();
@@ -252,6 +266,8 @@ namespace TenderTummiesAPI.Migrations
                     b.HasKey("TriggerID");
 
                     b.HasIndex("ChildID");
+
+                    b.HasIndex("FoodID");
 
                     b.ToTable("Trigger");
                 });
@@ -335,6 +351,11 @@ namespace TenderTummiesAPI.Migrations
                         .WithMany("Safes")
                         .HasForeignKey("ChildID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TenderTummiesAPI.Models.Food", "Food")
+                        .WithMany("Safes")
+                        .HasForeignKey("FoodID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TenderTummiesAPI.Models.Trial", b =>
@@ -342,6 +363,11 @@ namespace TenderTummiesAPI.Migrations
                     b.HasOne("TenderTummiesAPI.Models.Child", "Child")
                         .WithMany("Trials")
                         .HasForeignKey("ChildID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TenderTummiesAPI.Models.Food", "Food")
+                        .WithMany("Trials")
+                        .HasForeignKey("FoodID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TenderTummiesAPI.Models.Trigger", "Trigger")
@@ -362,6 +388,11 @@ namespace TenderTummiesAPI.Migrations
                     b.HasOne("TenderTummiesAPI.Models.Child", "Child")
                         .WithMany("Triggers")
                         .HasForeignKey("ChildID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TenderTummiesAPI.Models.Food", "Food")
+                        .WithMany("Triggers")
+                        .HasForeignKey("FoodID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
