@@ -12,44 +12,44 @@ using System.Globalization;
 
 namespace TenderTummiesAPI.Controllers
 {
-    //Sets URL route to <websitename>/Symptom
+    //Sets URL route to <websitename>/Food
     [Route("[controller]")]
-    //Creates a new Symptom controller class that inherits methods from AspNetCore Controller class
-    public class SymptomController : Controller
+    //Creates a new Food controller class that inherits methods from AspNetCore Controller class
+    public class FoodController : Controller
     {
         //Sets up an empty variable _context that will  be a reference of the TenderTummiesAPI class
         private TenderTummiesAPIContext _context;
-        //Contructor that instantiates a new Symptom controller 
+        //Contructor that instantiates a new Food controller 
         //Sets _context equal to a new instance of our TenderTummiesAPI class
-        public SymptomController(TenderTummiesAPIContext ctx)
+        public FoodController(TenderTummiesAPIContext ctx)
         {
             _context = ctx;
         }
 
         // GET METHOD
-        //http://localhost:5000/Symptom/ will return a list of all Symptomren for a certain user. 
+        //http://localhost:5000/Food/ will return a list of all Food for a certain user. 
         [HttpGet]
 
         //Get() is a mathod from the AspNetCore Controller class to retreive info from database. 
         public IActionResult Get()
         {
 
-            IQueryable<object> symptoms = _context.Symptom.Distinct();
+            IQueryable<object> food = _context.Food.Distinct();
 
             //if the collection is empty will retur NotFound and exit the method. 
-            if (symptoms == null)
+            if (food == null)
             {
                 return NotFound();
             }
 
-            //otherwise return list of the symptoms
-            return Ok(symptoms);
+            //otherwise return list of the food
+            return Ok(food);
 
         }
 
-        // GET Single Symptom
-         //http://localhost:5000/Symptom/{id} will return info on a single Symptom based on ID 
-        [HttpGet("id/{id}", Name = "GetSingleSymptom")]
+        // GET Single Food
+         //http://localhost:5000/Food/{id} will return info on a single Food based on ID 
+        [HttpGet("id/{id}", Name = "GetSingleFood")]
 
         //will run Get based on the id from the url route. 
         public IActionResult Get([FromRoute] int id)
@@ -62,17 +62,17 @@ namespace TenderTummiesAPI.Controllers
 
             try
             {
-                //will search the _context.Symptom for an entry that has the id we are looking for
-                //if found, will return that Symptom
+                //will search the _context.Food for an entry that has the id we are looking for
+                //if found, will return that Food
                 //if not found will return 404. 
-                Symptom symptom = _context.Symptom.Single(m => m.SymptomID == id);
+                Food food = _context.Food.Single(m => m.FoodID == id);
 
-                if (symptom == null)
+                if (food == null)
                 {
                     return NotFound();
                 }
                 
-                return Ok(symptom);
+                return Ok(food);
             }
             //if the try statement fails for some reason, will return error of what happened. 
             catch (System.InvalidOperationException ex)
@@ -82,23 +82,23 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // POST
-        // //http://localhost:5000/Symptom/ will post new symptom to the DB 
+        // //http://localhost:5000/Food/ will post new food to the DB 
         [HttpPost]
-        //takes the format of symptom type as a JSON format and adds to database. 
-        public IActionResult Post([FromBody] Symptom newSymptom)
+        //takes the format of food type as a JSON format and adds to database. 
+        public IActionResult Post([FromBody] Food newFood)
         {
             //Checks to make sure model state is valid
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (SymptomNameExists(newSymptom.Name)){
-                return BadRequest("This symptom already exists in the database");
+            if (FoodNameExists(newFood.Name)){
+                return BadRequest("This food already exists in the database");
             }
 
-            //Will add new symptom to the context
+            //Will add new food to the context
             //This will not yet be added to DB until .SaveChanges() is run
-            _context.Symptom.Add(newSymptom);
+            _context.Food.Add(newFood);
             
 
             //Will attempt to save the changes to the DB.
@@ -109,8 +109,8 @@ namespace TenderTummiesAPI.Controllers
             }
             catch (DbUpdateException ex)
             {
-                //this checks to see if a new Symptom we are trying to add has a SymptomID that already exists in the system
-                if (SymptomExists(newSymptom.SymptomID))
+                //this checks to see if a new Food we are trying to add has a FoodID that already exists in the system
+                if (FoodExists(newFood.FoodID))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -120,27 +120,27 @@ namespace TenderTummiesAPI.Controllers
                 }
             }
 
-            //if everything successfull, will run the "GetSingleSymptom" method while passing the new ID that was created and return the new Symptom
-            return CreatedAtRoute("GetSingleSymptom", new { id = newSymptom.SymptomID }, newSymptom);
+            //if everything successfull, will run the "GetSingleFood" method while passing the new ID that was created and return the new Food
+            return CreatedAtRoute("GetSingleSymptom", new { id = newFood.FoodID }, newFood);
         }
 
 
-        //Helper method to check to see if a SymptomID is already in the system
-        private bool SymptomExists(int SymptomID)
+        //Helper method to check to see if a FoodID is already in the system
+        private bool FoodExists(int FoodID)
         {
-          return _context.Symptom.Count(e => e.SymptomID == SymptomID) > 0;
+          return _context.Food.Count(e => e.FoodID == FoodID) > 0;
         }
 
-        private bool SymptomNameExists(string SymptomName)
+        private bool FoodNameExists(string FoodName)
         {
-            string[] stringArray = SymptomName.Split(null);
+            string[] stringArray = FoodName.Split(null);
             List<string> stringGroup = new List<string>();
             foreach (String thing in stringArray){
                 stringGroup.Add(FirstLetterToUpper(thing));
             }
-            string formattedSymptomName = string.Join(" ", stringGroup);
-            Symptom getSymptom = _context.Symptom.SingleOrDefault(e => e.Name == formattedSymptomName);
-            if (getSymptom != null && formattedSymptomName == getSymptom.Name){
+            string formattedFoodName = string.Join(" ", stringGroup);
+            Food getFood = _context.Food.SingleOrDefault(e => e.Name == formattedFoodName);
+            if (getFood != null && formattedFoodName == getFood.Name){
                 return true;
             } else {
                 return false;
