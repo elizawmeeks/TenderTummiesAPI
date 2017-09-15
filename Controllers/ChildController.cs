@@ -174,7 +174,7 @@ namespace TenderTummiesAPI.Controllers
 
         // DELETE url/Child/5
         // Deletes something based on an id.
-        [HttpDelete("{id}")]
+        [HttpDelete("id/{id}")]
         public IActionResult Delete(int id)
         {
             if (!ModelState.IsValid)
