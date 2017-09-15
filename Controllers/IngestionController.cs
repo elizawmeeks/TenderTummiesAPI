@@ -12,22 +12,22 @@ using System.Globalization;
 
 namespace TenderTummiesAPI.Controllers
 {
-    //Sets URL route to <websitename>/Ingestions
+    //Sets URL route to <websitename>/Ingestion
     [Route("[controller]")]
-    //Creates a new Ingestions controller class that inherits methods from AspNetCore Controller class
-    public class IngestionsController : Controller
+    //Creates a new Ingestion controller class that inherits methods from AspNetCore Controller class
+    public class IngestionController : Controller
     {
         //Sets up an empty variable _context that will  be a reference of the TenderTummiesAPI class
         private TenderTummiesAPIContext _context;
-        //Contructor that instantiates a new Ingestions controller 
+        //Contructor that instantiates a new Ingestion controller 
         //Sets _context equal to a new instance of our TenderTummiesAPI class
-        public IngestionsController(TenderTummiesAPIContext ctx)
+        public IngestionController(TenderTummiesAPIContext ctx)
         {
             _context = ctx;
         }
 
         // GET METHOD
-        //http://localhost:5000/Food/ will return a list of all Food for a certain user. 
+        //http://localhost:5000/Ingestion/ will return a list of all Ingestion for a certain user. 
         [HttpGet]
 
         //Get() is a mathod from the AspNetCore Controller class to retreive info from database. 
@@ -96,9 +96,9 @@ namespace TenderTummiesAPI.Controllers
                 return BadRequest("This ingestion type already exists in the database");
             }
 
-            //Will add new food to the context
+            //Will add new Ingestion to the context
             //This will not yet be added to DB until .SaveChanges() is run
-            _context.Food.Add(newIngestion);
+            _context.Ingestion.Add(newIngestion);
             
 
             //Will attempt to save the changes to the DB.
