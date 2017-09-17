@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TenderTummiesAPI.Data;
 using TenderTummiesAPI.Models;
+using TenderTummiesAPI.Helpers;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,9 @@ namespace TenderTummiesAPI.Controllers
     {
         //Sets up an empty variable _context that will  be a reference of the TenderTummiesAPI class
         private TenderTummiesAPIContext _context;
+        
+         //Instantiates StandardizeNames so I can make names titlecase
+        private StandardizeNames _nameHelper = new StandardizeNames();
         //Contructor that instantiates a new Ingestion controller 
         //Sets _context equal to a new instance of our TenderTummiesAPI class
         public IngestionController(TenderTummiesAPIContext ctx)
@@ -95,6 +99,8 @@ namespace TenderTummiesAPI.Controllers
             if (IngestionNameExists(newIngestion.Name)){
                 return BadRequest("This ingestion type already exists in the database");
             }
+            //Formats submission so that the first letter of every word is capitalized
+            newIngestion.Name = _nameHelper.ToTitlecase(newIngestion.Name);
 
             //Will add new Ingestion to the context
             //This will not yet be added to DB until .SaveChanges() is run
@@ -133,29 +139,13 @@ namespace TenderTummiesAPI.Controllers
 
         private bool IngestionNameExists(string IngestionName)
         {
-            string[] stringArray = IngestionName.Split(null);
-            List<string> stringGroup = new List<string>();
-            foreach (String thing in stringArray){
-                stringGroup.Add(FirstLetterToUpper(thing));
-            }
-            string formattedIngestionName = string.Join(" ", stringGroup);
+            string formattedIngestionName = _nameHelper.ToTitlecase(IngestionName);
             Ingestion getIngestion = _context.Ingestion.SingleOrDefault(e => e.Name == formattedIngestionName);
             if (getIngestion != null && formattedIngestionName == getIngestion.Name){
                 return true;
             } else {
                 return false;
             }
-        }
-
-        private string FirstLetterToUpper(string str)
-        {
-            if (str == null){
-                return null;
-            }
-            if (str.Length > 1){
-                return char.ToUpper(str[0]) + str.Substring(1);
-            }
-            return str.ToUpper();
         }
 
     }

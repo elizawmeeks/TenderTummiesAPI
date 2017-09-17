@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TenderTummiesAPI.Data;
 using TenderTummiesAPI.Models;
+using TenderTummiesAPI.Helpers;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,10 @@ namespace TenderTummiesAPI.Controllers
     {
         //Sets up an empty variable _context that will  be a reference of the TenderTummiesAPI class
         private TenderTummiesAPIContext _context;
+
+         //Instantiates StandardizeNames so I can make names titlecase
+        private StandardizeNames _nameHelper = new StandardizeNames();
+
         //Contructor that instantiates a new Food controller 
         //Sets _context equal to a new instance of our TenderTummiesAPI class
         public FoodController(TenderTummiesAPIContext ctx)
@@ -30,13 +35,12 @@ namespace TenderTummiesAPI.Controllers
         //http://localhost:5000/Food/ will return a list of all Food for a certain user. 
         [HttpGet]
 
-        //Get() is a mathod from the AspNetCore Controller class to retreive info from database. 
         public IActionResult Get()
         {
 
             IQueryable<object> food = _context.Food.Distinct();
 
-            //if the collection is empty will retur NotFound and exit the method. 
+            //if the collection is empty will return NotFound and exit the method. 
             if (food == null)
             {
                 return NotFound();
@@ -95,7 +99,8 @@ namespace TenderTummiesAPI.Controllers
             if (FoodNameExists(newFood.Name)){
                 return BadRequest("This food already exists in the database");
             }
-
+            //Formats submission so that the first letter of every word is capitalized
+            newFood.Name = _nameHelper.ToTitlecase(newFood.Name);
             //Will add new food to the context
             //This will not yet be added to DB until .SaveChanges() is run
             _context.Food.Add(newFood);
@@ -130,32 +135,16 @@ namespace TenderTummiesAPI.Controllers
         {
           return _context.Food.Count(e => e.FoodID == FoodID) > 0;
         }
-
+        //Helper method to see if the food name exists in the database already
         private bool FoodNameExists(string FoodName)
         {
-            string[] stringArray = FoodName.Split(null);
-            List<string> stringGroup = new List<string>();
-            foreach (String thing in stringArray){
-                stringGroup.Add(FirstLetterToUpper(thing));
-            }
-            string formattedFoodName = string.Join(" ", stringGroup);
+            string formattedFoodName = _nameHelper.ToTitlecase(FoodName);
             Food getFood = _context.Food.SingleOrDefault(e => e.Name == formattedFoodName);
             if (getFood != null && formattedFoodName == getFood.Name){
                 return true;
             } else {
                 return false;
             }
-        }
-
-        private string FirstLetterToUpper(string str)
-        {
-            if (str == null){
-                return null;
-            }
-            if (str.Length > 1){
-                return char.ToUpper(str[0]) + str.Substring(1);
-            }
-            return str.ToUpper();
         }
 
     }
