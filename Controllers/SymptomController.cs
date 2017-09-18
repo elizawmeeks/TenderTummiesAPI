@@ -29,20 +29,17 @@ namespace TenderTummiesAPI.Controllers
         // GET METHOD
         //http://localhost:5000/Symptom/ will return a list of all Symptomren for a certain user. 
         [HttpGet]
-
-        //Get() is a mathod from the AspNetCore Controller class to retreive info from database. 
+        
         public IActionResult Get()
         {
 
             IQueryable<object> symptoms = _context.Symptom.Distinct();
-
-            //if the collection is empty will retur NotFound and exit the method. 
+            
             if (symptoms == null)
             {
                 return NotFound();
             }
-
-            //otherwise return list of the symptoms
+            
             return Ok(symptoms);
 
         }
@@ -50,11 +47,10 @@ namespace TenderTummiesAPI.Controllers
         // GET Single Symptom
          //http://localhost:5000/Symptom/{id} will return info on a single Symptom based on ID 
         [HttpGet("id/{id}", Name = "GetSingleSymptom")]
-
-        //will run Get based on the id from the url route. 
+        
         public IActionResult Get([FromRoute] int id)
         {
-            //if you request anything other than an Id you will get a return of BadRequest. 
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -62,9 +58,7 @@ namespace TenderTummiesAPI.Controllers
 
             try
             {
-                //will search the _context.Symptom for an entry that has the id we are looking for
-                //if found, will return that Symptom
-                //if not found will return 404. 
+                
                 Symptom symptom = _context.Symptom.Single(m => m.SymptomID == id);
 
                 if (symptom == null)
@@ -74,7 +68,7 @@ namespace TenderTummiesAPI.Controllers
                 
                 return Ok(symptom);
             }
-            //if the try statement fails for some reason, will return error of what happened. 
+            
             catch (System.InvalidOperationException ex)
             {
                 return NotFound(ex);
@@ -87,7 +81,7 @@ namespace TenderTummiesAPI.Controllers
         //takes the format of symptom type as a JSON format and adds to database. 
         public IActionResult Post([FromBody] Symptom newSymptom)
         {
-            //Checks to make sure model state is valid
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -95,21 +89,16 @@ namespace TenderTummiesAPI.Controllers
             if (SymptomNameExists(newSymptom.Name)){
                 return BadRequest("This symptom already exists in the database");
             }
-
-            //Will add new symptom to the context
-            //This will not yet be added to DB until .SaveChanges() is run
+            
             _context.Symptom.Add(newSymptom);
             
-
-            //Will attempt to save the changes to the DB.
-            //If there is an error, will throw exception code. 
             try
             {
                 _context.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
-                //this checks to see if a new Symptom we are trying to add has a SymptomID that already exists in the system
+                
                 if (SymptomExists(newSymptom.SymptomID))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
@@ -119,8 +108,7 @@ namespace TenderTummiesAPI.Controllers
                     throw(ex);
                 }
             }
-
-            //if everything successfull, will run the "GetSingleSymptom" method while passing the new ID that was created and return the new Symptom
+            
             return CreatedAtRoute("GetSingleSymptom", new { id = newSymptom.SymptomID }, newSymptom);
         }
 

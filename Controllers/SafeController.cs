@@ -28,26 +28,22 @@ namespace TenderTummiesAPI.Controllers
         // GET METHOD
         //http://localhost:5000/Safe/{childID} will return a list of all safes for a certain child. 
         [HttpGet("{child}", Name = "GetChildsSafes")]
-
-        //Get() is a mathod from the AspNetCore Controller class to retreive info from database. 
+        
         public IActionResult GetByChild([FromRoute] int child)
         {
-
-            //if you request anything other than child you will get a return of BadRequest. 
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            //Sets a new IQuerable Collection of <objects> that will be filled with each instance of _context.Safe
+            
             IQueryable<object> safes = _context.Safe.Include("Food").Where(c => c.ChildID == child);
-
-            //if the collection is empty will retur NotFound and exit the method. 
+            
             if (safes == null)
             {
                 return NotFound();
             }
-
-            //otherwise return list of the safes
+            
             return Ok(safes);
 
         }
@@ -55,11 +51,10 @@ namespace TenderTummiesAPI.Controllers
         // GET Single Safe
          //http://localhost:5000/Safe/{id} will return info on a single Safe based on ID 
         [HttpGet("id/{id}", Name = "GetSingleSafe")]
-
-        //will run Get based on the id from the url route. 
+        
         public IActionResult GetById([FromRoute] int id)
         {
-            //if you request anything other than an Id you will get a return of BadRequest. 
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -67,9 +62,7 @@ namespace TenderTummiesAPI.Controllers
 
             try
             {
-                //will search the _context.Safe for an entry that has the id we are looking for
-                //if found, will return that Safe
-                //if not found will return 404. 
+                
                 Safe safe = _context.Safe.Include("Food").Single(m => m.SafeID == id);
 
                 if (safe == null)
@@ -79,7 +72,7 @@ namespace TenderTummiesAPI.Controllers
                 
                 return Ok(safe);
             }
-            //if the try statement fails for some reason, will return error of what happened. 
+            
             catch (System.InvalidOperationException ex)
             {
                 return NotFound(ex);
@@ -92,7 +85,7 @@ namespace TenderTummiesAPI.Controllers
         //takes the format of Safe type as a JSON format and adds to database. 
         public IActionResult Post([FromBody] Safe newSafe)
         {
-            //Checks to make sure model state is valid
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -100,19 +93,15 @@ namespace TenderTummiesAPI.Controllers
             try{
                 Safe exists = _context.Safe.Single(s => s.ChildID == newSafe.ChildID && s.FoodID == newSafe.FoodID);
             }catch{
-                //Will add new Safe to the context only if there's not already an entry in the database with that child and
-                //that safe.
-                //This will not yet be added to DB until .SaveChanges() is run
+                
                 _context.Safe.Add(newSafe);
-                //Will attempt to save the changes to the DB.
-                //If there is an error, will throw exception code. 
+                
                 try
                 {
                     _context.SaveChanges();
                 }
                 catch (DbUpdateException ex)
                 {
-                    //this checks to see if a new Safe we are trying to add has a SafeID that already exists in the system
                     if (SafeExists(newSafe.SafeID))
                     {
                         return new StatusCodeResult(StatusCodes.Status409Conflict);
@@ -122,8 +111,7 @@ namespace TenderTummiesAPI.Controllers
                         throw(ex);
                     }
                 }
-
-                //if everything successfull, will run the "GetSingleSafe" method while passing the new ID that was created and return the new Safe
+                
                 return CreatedAtRoute("GetSingleSafe", new { id = newSafe.SafeID }, newSafe);
             }
 

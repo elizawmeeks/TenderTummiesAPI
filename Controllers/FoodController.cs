@@ -24,7 +24,6 @@ namespace TenderTummiesAPI.Controllers
          //Instantiates StandardizeNames so I can make names titlecase
         private StandardizeNames _nameHelper = new StandardizeNames();
 
-        //Contructor that instantiates a new Food controller 
         //Sets _context equal to a new instance of our TenderTummiesAPI class
         public FoodController(TenderTummiesAPIContext ctx)
         {
@@ -40,13 +39,11 @@ namespace TenderTummiesAPI.Controllers
 
             IQueryable<object> food = _context.Food.Distinct();
 
-            //if the collection is empty will return NotFound and exit the method. 
             if (food == null)
             {
                 return NotFound();
             }
 
-            //otherwise return list of the food
             return Ok(food);
 
         }
@@ -54,11 +51,8 @@ namespace TenderTummiesAPI.Controllers
         // GET Single Food
          //http://localhost:5000/Food/{id} will return info on a single Food based on ID 
         [HttpGet("id/{id}", Name = "GetSingleFood")]
-
-        //will run Get based on the id from the url route. 
         public IActionResult Get([FromRoute] int id)
         {
-            //if you request anything other than an Id you will get a return of BadRequest. 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -66,9 +60,6 @@ namespace TenderTummiesAPI.Controllers
 
             try
             {
-                //will search the _context.Food for an entry that has the id we are looking for
-                //if found, will return that Food
-                //if not found will return 404. 
                 Food food = _context.Food.Single(m => m.FoodID == id);
 
                 if (food == null)
@@ -78,7 +69,7 @@ namespace TenderTummiesAPI.Controllers
                 
                 return Ok(food);
             }
-            //if the try statement fails for some reason, will return error of what happened. 
+
             catch (System.InvalidOperationException ex)
             {
                 return NotFound(ex);
@@ -86,12 +77,10 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // POST
-        // //http://localhost:5000/Food/ will post new food to the DB 
+        // http://localhost:5000/Food/ will post new food to the DB in titlecase 
         [HttpPost]
-        //takes the format of food type as a JSON format and adds to database. 
         public IActionResult Post([FromBody] Food newFood)
         {
-            //Checks to make sure model state is valid
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -99,22 +88,18 @@ namespace TenderTummiesAPI.Controllers
             if (FoodNameExists(newFood.Name)){
                 return BadRequest("This food already exists in the database");
             }
-            //Formats submission so that the first letter of every word is capitalized
+            
             newFood.Name = _nameHelper.ToTitlecase(newFood.Name);
-            //Will add new food to the context
-            //This will not yet be added to DB until .SaveChanges() is run
+            
             _context.Food.Add(newFood);
             
-
-            //Will attempt to save the changes to the DB.
-            //If there is an error, will throw exception code. 
             try
             {
                 _context.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
-                //this checks to see if a new Food we are trying to add has a FoodID that already exists in the system
+                
                 if (FoodExists(newFood.FoodID))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
@@ -125,7 +110,6 @@ namespace TenderTummiesAPI.Controllers
                 }
             }
 
-            //if everything successfull, will run the "GetSingleFood" method while passing the new ID that was created and return the new Food
             return CreatedAtRoute("GetSingleSymptom", new { id = newFood.FoodID }, newFood);
         }
 
@@ -135,6 +119,7 @@ namespace TenderTummiesAPI.Controllers
         {
           return _context.Food.Count(e => e.FoodID == FoodID) > 0;
         }
+
         //Helper method to see if the food name exists in the database already
         private bool FoodNameExists(string FoodName)
         {
