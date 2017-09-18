@@ -11,24 +11,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TenderTummiesAPI.Controllers
 {
-    //Sets URL route to <websitename>/Trial
+    //Sets URL route to <websitename>/TrialEvent
     [Route("[controller]")]
-    //Creates a new Trial controller class that inherits methods from AspNetCore Controller class
-    public class TrialController : Controller
+    //Creates a new TrialEvent controller class that inherits methods from AspNetCore Controller class
+    public class TrialEventController : Controller
     {
         
         private TenderTummiesAPIContext _context;
         
-        public TrialController(TenderTummiesAPIContext ctx)
+        public TrialEventController(TenderTummiesAPIContext ctx)
         {
             _context = ctx;
         }
 
         // GET METHOD
-        //http://localhost:5000/Trial/id will return a list of all Trials for a certain child. 
-        [HttpGet("{child}", Name = "GetChildsTrials")]
+        //http://localhost:5000/TrialEvent/id will return a list of all TrialEvents for a certain trial. 
+        [HttpGet("{trialEventID}", Name = "GetTrialsTrialEvents")]
         
-        public IActionResult GetByChild([FromRoute] int child)
+        public IActionResult GetByTrial([FromRoute] int trialEventID)
         {
             
             if (!ModelState.IsValid)
@@ -36,22 +36,21 @@ namespace TenderTummiesAPI.Controllers
                 return BadRequest(ModelState);
             }
             
-            IQueryable<Trial> trials = _context.Trial
-                .Include("Food")
-                .Where(c => c.ChildID == child);
+            IQueryable<TrialEvent> trialEvents = _context.TrialEvent
+                .Where(c => c.TrialEventID == trialEventID);
 
-            if (trials == null)
+            if (trialEvents == null)
             {
                 return NotFound();
             }
 
-            return Ok(trials);
+            return Ok(trialEvents);
 
         }
 
-        // GET Single Trial
-         //http://localhost:5000/Trial/{id} will return info on a single Trial based on ID 
-        [HttpGet("id/{id}", Name = "GetSingleTrial")]
+        // GET Single Trial Event
+         //http://localhost:5000/TrialEvent/{id} will return info on a single Trial Event based on ID 
+        [HttpGet("id/{id}", Name = "GetSingleTrialEvent")]
 
         public IActionResult GetById([FromRoute] int id)
         {
@@ -64,18 +63,15 @@ namespace TenderTummiesAPI.Controllers
             try
             {
                 
-                Trial trial = _context.Trial
-                    .Include("Food")
-                    .Include("ReactionEvents")
-                    .Include("TrialEvents")
+                TrialEvent trialEvent = _context.TrialEvent
                     .Single(m => m.TrialID == id);
 
-                if (trial == null)
+                if (trialEvent == null)
                 {
                     return NotFound();
                 }
                 
-                return Ok(trial);
+                return Ok(trialEvent);
             }
             
             catch (System.InvalidOperationException ex)
@@ -87,27 +83,27 @@ namespace TenderTummiesAPI.Controllers
 
 
         //Helper method to check to see if a TrialID is already in the system
-        private bool TrialExists(int trialID)
+        private bool TrialEventExists(int trialEventID)
         {
-          return _context.Trial.Count(e => e.TrialID == trialID) > 0;
+          return _context.TrialEvent.Count(e => e.TrialEventID == trialEventID) > 0;
         }
 
         // PUT 
-         //http://localhost:5000/Trial/{id} will edit a Trial entry in the DB.  
+         //http://localhost:5000/TrialEvent/{id} will edit a Trial event entry in the DB.  
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Trial modifiedTrial)
+        public IActionResult Put(int id, [FromBody] TrialEvent modifiedTrialEvent)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != modifiedTrial.TrialID)
+            if (id != modifiedTrialEvent.TrialID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(modifiedTrial).State = EntityState.Modified;
+            _context.Entry(modifiedTrialEvent).State = EntityState.Modified;
 
             try
             {
@@ -115,7 +111,7 @@ namespace TenderTummiesAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TrialExists(id))
+                if (!TrialEventExists(id))
                 {
                     return NotFound();
                 }
@@ -128,7 +124,7 @@ namespace TenderTummiesAPI.Controllers
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // DELETE url/Trial/5
+        // DELETE url/TrialEvent/5
         // Deletes something based on an id.
         [HttpDelete("id/{id}")]
         public IActionResult Delete(int id)
@@ -138,16 +134,16 @@ namespace TenderTummiesAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            Trial singleTrial = _context.Trial.Single(m => m.TrialID == id);
-            if (singleTrial == null)
+            TrialEvent singleTrialEvent = _context.TrialEvent.Single(m => m.TrialEventID == id);
+            if (singleTrialEvent == null)
             {
                 return NotFound();
             }
 
-            _context.Trial.Remove(singleTrial);
+            _context.TrialEvent.Remove(singleTrialEvent);
             _context.SaveChanges();
 
-            return Ok(singleTrial);
+            return Ok(singleTrialEvent);
         }
 
     }
