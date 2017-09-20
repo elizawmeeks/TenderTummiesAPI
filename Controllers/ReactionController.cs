@@ -88,7 +88,7 @@ namespace TenderTummiesAPI.Controllers
         // //http://localhost:5000/Reaction/ will post new Reaction to the DB 
         [HttpPost]
         //takes the format of Reaction type as a JSON format and adds to database. 
-        //Accepts a Reaction and an array of symptoms that come in as type ReactionSubmission.
+        //Accepts a Reaction and an array of triggers that come in as type ReactionSubmission.
         //ReactionSubmission have a symptom ID, acute, and chronic booleans, but no ReactionID.
         public IActionResult Post([FromBody] ReactionSubmission reactionSub)
         {
@@ -97,7 +97,6 @@ namespace TenderTummiesAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             Reaction newRxn = new Reaction()
                 {
                     ChildID = reactionSub.ChildID,
@@ -110,6 +109,10 @@ namespace TenderTummiesAPI.Controllers
             _context.Reaction.Add(newRxn);
 
             foreach (int id in reactionSub.TriggerIDs){
+                var isChilds = _context.Trigger.SingleOrDefault(t => t.TriggerID == id);
+                if (isChilds.ChildID != reactionSub.ChildID){
+                    return BadRequest("This trigger ID is not associated with the child provided");
+                }
                 ReactionTrigger newRT = new ReactionTrigger()
                 {
                     ReactionID = newRxn.ReactionID,

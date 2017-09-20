@@ -127,7 +127,7 @@ namespace TenderTummiesAPI.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ChildID = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    EndDate = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d')"),
+                    EndDate = table.Column<DateTime>(nullable: true, defaultValueSql: "null"),
                     FoodType = table.Column<string>(nullable: false),
                     IngestionID = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d')")

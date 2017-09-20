@@ -78,9 +78,9 @@ namespace TenderTummiesAPI.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("strftime('%Y-%m-%d')");
+                        .HasDefaultValueSql("null");
 
                     b.Property<string>("FoodType")
                         .IsRequired();

@@ -81,7 +81,7 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // POST
-        // //http://localhost:5000/ReactionEvent/ will post new reaction event to the DB 
+        // //http://localhost:5000/ReactionEvent/ will post new reaction event and associate symptoms to the DB 
         [HttpPost]
         public IActionResult Post([FromBody] ReactionEventSubmission reSub)
         {

@@ -37,7 +37,7 @@ namespace TenderTummiesAPI.Data
                 .HasDefaultValueSql("strftime('%Y-%m-%d')");
             modelBuilder.Entity<Reaction>()
                 .Property(p => p.EndDate)
-                .HasDefaultValueSql("strftime('%Y-%m-%d')");
+                .HasDefaultValueSql("null");
             modelBuilder.Entity<ReactionEvent>()
                 .Property(c => c.DateTime)
                 .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");

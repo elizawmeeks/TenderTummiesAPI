@@ -50,7 +50,7 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // GET Single Child
-         //http://localhost:5000/Child/{id} will return info on a single child based on ID 
+         //http://localhost:5000/Child/id/{id} will return info on a single child based on ID 
         [HttpGet("id/{id}", Name = "GetSingleChild")]
 
         public IActionResult GetById([FromRoute] int id)
@@ -124,10 +124,12 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // PUT 
-         //http://localhost:5000/Child/{id} will edit a child entry in the DB.  
-        [HttpPut("{id}")]
+         //http://localhost:5000/Child/id/{id} will edit a child entry in the DB.  
+        [HttpPut("id/{id}")]
         public IActionResult Put(int id, [FromBody] Child modifiedChild)
         {
+            modifiedChild.ChildID = id;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -159,7 +161,7 @@ namespace TenderTummiesAPI.Controllers
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // DELETE url/Child/5
+        // DELETE url/Child/id/5
         // Deletes something based on an id.
         [HttpDelete("id/{id}")]
         public IActionResult Delete(int id)

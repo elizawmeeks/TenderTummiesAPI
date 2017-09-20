@@ -49,7 +49,7 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // GET Single Food
-         //http://localhost:5000/Food/{id} will return info on a single Food based on ID 
+         //http://localhost:5000/Food/id/{id} will return info on a single Food based on ID 
         [HttpGet("id/{id}", Name = "GetSingleFood")]
         public IActionResult Get([FromRoute] int id)
         {
