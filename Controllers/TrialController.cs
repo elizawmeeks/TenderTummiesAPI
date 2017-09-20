@@ -84,7 +84,37 @@ namespace TenderTummiesAPI.Controllers
             }
         }
 
+        // POST
+        // //http://localhost:5000/Trial/ will post new Trial to the DB 
+        [HttpPost]
+        public IActionResult Post([FromBody] Trial newTrial)
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            _context.Trial.Add(newTrial);
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (TrialExists(newTrial.TrialID))
+                {
+                    return new StatusCodeResult(StatusCodes.Status409Conflict);
+                }
+                else
+                {
+                    throw(ex);
+                }
+            }
+            return CreatedAtRoute("GetSingleTrial", new { id = newTrial.TrialID }, newTrial);
+
+        }
 
         //Helper method to check to see if a TrialID is already in the system
         private bool TrialExists(int trialID)

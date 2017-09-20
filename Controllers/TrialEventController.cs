@@ -64,7 +64,7 @@ namespace TenderTummiesAPI.Controllers
             {
                 
                 TrialEvent trialEvent = _context.TrialEvent
-                    .Single(m => m.TrialID == id);
+                    .Single(m => m.TrialEventID == id);
 
                 if (trialEvent == null)
                 {
@@ -80,7 +80,37 @@ namespace TenderTummiesAPI.Controllers
             }
         }
 
+        // POST
+        // //http://localhost:5000/TrialEvent/ will post new Trial event to the DB 
+        [HttpPost]
+        public IActionResult Post([FromBody] TrialEvent newTrialEvent)
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            _context.TrialEvent.Add(newTrialEvent);
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (TrialEventExists(newTrialEvent.TrialEventID))
+                {
+                    return new StatusCodeResult(StatusCodes.Status409Conflict);
+                }
+                else
+                {
+                    throw(ex);
+                }
+            }
+            return CreatedAtRoute("GetSingleTrialEvent", new { id = newTrialEvent.TrialEventID }, newTrialEvent);
+
+        }
 
         //Helper method to check to see if a TrialID is already in the system
         private bool TrialEventExists(int trialEventID)
