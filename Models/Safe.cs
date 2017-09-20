@@ -17,7 +17,9 @@ namespace TenderTummiesAPI.Models
         public virtual Child Child { get; set; }
         
         [Required]
-        public string Food { get; set; }
+        public int FoodID { get; set; }
+
+        public virtual Food Food { get; set; }
 
     }
 }

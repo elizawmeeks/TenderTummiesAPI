@@ -31,7 +31,7 @@ namespace TenderTummiesAPI.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime EndDate { get; set; }
+        public Nullable<DateTime> EndDate { get; set; }
         public string Description { get; set; }
 
         public ICollection<ReactionEvent> ReactionEvents { get; set; }

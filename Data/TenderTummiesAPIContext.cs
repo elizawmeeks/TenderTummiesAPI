@@ -15,6 +15,7 @@ namespace TenderTummiesAPI.Data
         // Creates tables in the database; takes our models and turns them into tables in the database. Any models without a DbSet do not turn into tables in the database.
         public DbSet<Child> Child { get; set; }
         public DbSet<Symptom> Symptom { get; set; }
+        public DbSet<Food> Food { get; set; }
         public DbSet<Trigger> Trigger { get; set; }
         public DbSet<Safe> Safe { get; set; }
         public DbSet<TriggerSymptom> TriggerSymptom { get; set; }
@@ -36,7 +37,7 @@ namespace TenderTummiesAPI.Data
                 .HasDefaultValueSql("strftime('%Y-%m-%d')");
             modelBuilder.Entity<Reaction>()
                 .Property(p => p.EndDate)
-                .HasDefaultValueSql("strftime('%Y-%m-%d')");
+                .HasDefaultValueSql("null");
             modelBuilder.Entity<ReactionEvent>()
                 .Property(c => c.DateTime)
                 .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
