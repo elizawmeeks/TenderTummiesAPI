@@ -6,9 +6,14 @@ It uses .NET Core and SQLite.
 
 ## Table of Contents
 
-[Installing Core Technologies](#Installing-Core-Technologies)
+  * [Installing Core Technologies](#installing-core-technologies)
+    * [SQLite](#sqlite)
+    	* [For OSX Users](#for-osx-users)
+  		* [For Windows Users](#for-windows-users)
+  	* [SQL Browser](#sql-browser)
+  	* [Visual Studio Code](#visual-studio-code)
 
-## Installing Core Technologies
+# Installing Core Technologies
 
 ## SQLite
 
