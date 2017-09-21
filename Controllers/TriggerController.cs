@@ -144,11 +144,9 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // POST
-        // //http://localhost:5000/Trigger/Symptom/TriggerID will post new Reaction to the DB 
+        // //http://localhost:5000/Trigger/Symptom will post new Reaction to the DB 
         [HttpPost("Symptom")]
-        //takes the format of Reaction type as a JSON format and adds to database. 
-        //Accepts a Reaction and an array of symptoms that come in as type ReactionSubmission.
-        //ReactionSubmission have a symptom ID, acute, and chronic booleans, but no triggerID.
+        
         public IActionResult PostSymptoms([FromBody] TriggerSymptom newTS)
         {
             
@@ -180,8 +178,8 @@ namespace TenderTummiesAPI.Controllers
 
 
         // PUT 
-         //http://localhost:5000/Trigger/{id} will edit a Trigger entry in the DB.  
-        [HttpPut("{id}")]
+         //http://localhost:5000/Trigger/id/{id} will edit a Trigger entry in the DB.  
+        [HttpPut("id/{id}")]
         public IActionResult Put(int id, [FromBody] Trigger modifiedTrigger)
         {
             if (!ModelState.IsValid)
@@ -227,12 +225,19 @@ namespace TenderTummiesAPI.Controllers
             }
 
             Trigger singleTrigger = _context.Trigger.Single(m => m.TriggerID == id);
+            IQueryable<TriggerSymptom> allTS = _context.TriggerSymptom.Where(s => s.TriggerID == id);
+
             if (singleTrigger == null)
             {
                 return NotFound();
             }
 
             _context.Trigger.Remove(singleTrigger);
+
+             foreach (var item in allTS){
+                _context.TriggerSymptom.Remove(item);
+            }
+
             _context.SaveChanges();
 
             return Ok(singleTrigger);

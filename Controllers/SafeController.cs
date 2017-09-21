@@ -49,7 +49,7 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // GET Single Safe
-         //http://localhost:5000/Safe/{id} will return info on a single Safe based on ID 
+         //http://localhost:5000/Safe/id/{id} will return info on a single Safe based on ID 
         [HttpGet("id/{id}", Name = "GetSingleSafe")]
         
         public IActionResult GetById([FromRoute] int id)
@@ -126,7 +126,7 @@ namespace TenderTummiesAPI.Controllers
           return _context.Safe.Count(e => e.SafeID == safeID) > 0;
         }
 
-        // DELETE url/Safe/5
+        // DELETE url/Safe/id/5
         // Deletes something based on an id.
         [HttpDelete("id/{id}")]
         public IActionResult Delete(int id)

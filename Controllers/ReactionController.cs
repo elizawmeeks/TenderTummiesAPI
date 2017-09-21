@@ -142,11 +142,11 @@ namespace TenderTummiesAPI.Controllers
 
         // POST
         // //http://localhost:5000/Reaction/Trigger/ReactionID will post new Reaction to the DB 
-        [HttpPost("Trigger/{reactionID}")]
+        [HttpPost("Trigger")]
         //takes the format of Reaction type as a JSON format and adds to database. 
         //Accepts a Reaction and an array of symptoms that come in as type ReactionSubmission.
         //ReactionSubmission have a symptom ID, acute, and chronic booleans, but no ReactionID.
-        public IActionResult PostTrigger(int reactionID, [FromBody] int triggerID)
+        public IActionResult PostTrigger(int reactionID, [FromBody] ReactionTrigger newRT)
         {
             
             if (!ModelState.IsValid)
@@ -154,12 +154,13 @@ namespace TenderTummiesAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            ReactionTrigger newRT = new ReactionTrigger()
-                {
-                    ReactionID = reactionID,
-                    TriggerID = triggerID
-                };
-            
+            //Make sure trigger bieng submitted actually belongs to the child in the reaction.
+            Trigger getTrigger = _context.Trigger.SingleOrDefault(t => t.TriggerID == newRT.TriggerID);
+            Reaction getReaction = _context.Reaction.SingleOrDefault(r => r.ReactionID == newRT.ReactionID);
+            if (getTrigger.ChildID != getReaction.ChildID){
+                return BadRequest("This trigger is not associated with this child.");
+            }
+
             _context.ReactionTrigger.Add(newRT);
             
             try
@@ -185,6 +186,7 @@ namespace TenderTummiesAPI.Controllers
         [HttpPut("id/{id}")]
         public IActionResult Put(int id, [FromBody] Reaction modifiedReaction)
         {
+            modifiedReaction.ReactionID = id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -25,7 +25,7 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // GET METHOD
-        //http://localhost:5000/ReactionEvent/{reactionID} will return a list of all ReactionEvents for a certain child. 
+        //http://localhost:5000/ReactionEvent/{reactionID} will return a list of all ReactionEvents for a certain reaction. 
         [HttpGet("{rxnID}", Name = "GetAssociatedReactionsReactionEvents")]
         public IActionResult GetByAssociatedReaction([FromRoute] int rxnID)
         {
@@ -176,9 +176,10 @@ namespace TenderTummiesAPI.Controllers
 
         // PUT 
          //http://localhost:5000/ReactionEvent/{id} will edit a ReactionEvent entry in the DB.  
-        [HttpPut("{id}")]
+        [HttpPut("id/{id}")]
         public IActionResult Put(int id, [FromBody] ReactionEvent modifiedReactionEvent)
         {
+            modifiedReactionEvent.ReactionEventID = id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -212,7 +213,7 @@ namespace TenderTummiesAPI.Controllers
 
 
         // DELETE url/ReactionEvent/5
-        // Deletes something based on an id.
+        // Deletes Reaction Event and all associated Symptoms. based on an id.
         [HttpDelete("id/{id}")]
         public IActionResult Delete(int id)
         {
@@ -222,6 +223,7 @@ namespace TenderTummiesAPI.Controllers
             }
 
             ReactionEvent singleReactionEvent = _context.ReactionEvent.Single(m => m.ReactionEventID == id);
+            IQueryable<ReactionEventSymptom> RESymptoms = _context.ReactionEventSymptom.Where(r => r.ReactionEventID == id);
             
             if (singleReactionEvent == null)
             {
@@ -229,6 +231,9 @@ namespace TenderTummiesAPI.Controllers
             }
 
             _context.ReactionEvent.Remove(singleReactionEvent);
+            foreach (var item in RESymptoms){
+                _context.ReactionEventSymptom.Remove(item);
+            }
             _context.SaveChanges();
 
             return Ok(singleReactionEvent);
