@@ -4,6 +4,10 @@ This is an API for the Tender Tummies FPIES database. This API will allow user t
 
 It uses .NET Core and SQLite.
 
+## Table of Contents
+
+[Installing Core Technologies](#Installing-Core-Technologies)
+
 ## Installing Core Technologies
 
 ## SQLite
