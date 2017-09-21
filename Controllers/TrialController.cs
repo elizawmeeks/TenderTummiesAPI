@@ -89,10 +89,19 @@ namespace TenderTummiesAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Trial newTrial)
         {
-            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if (newTrial.TriggerID.HasValue){
+                Trigger getTrigger = _context.Trigger.SingleOrDefault(t => t.TriggerID == newTrial.TriggerID);
+                if (getTrigger.FoodID != newTrial.FoodID){
+                    return BadRequest("The food ID on the trial does not match the food ID on the trigger");
+                }
+                if (getTrigger.ChildID !=  newTrial.ChildID){
+                    return BadRequest("The ChildID on the trigger does not match the ChildID on the trial");
+                }
             }
 
             _context.Trial.Add(newTrial);
@@ -124,9 +133,10 @@ namespace TenderTummiesAPI.Controllers
 
         // PUT 
          //http://localhost:5000/Trial/{id} will edit a Trial entry in the DB.  
-        [HttpPut("{id}")]
+        [HttpPut("id/{id}")]
         public IActionResult Put(int id, [FromBody] Trial modifiedTrial)
         {
+            modifiedTrial.TrialID = id;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -135,6 +145,16 @@ namespace TenderTummiesAPI.Controllers
             if (id != modifiedTrial.TrialID)
             {
                 return BadRequest();
+            }
+
+            if (modifiedTrial.TriggerID.HasValue){
+                Trigger getTrigger = _context.Trigger.SingleOrDefault(t => t.TriggerID == modifiedTrial.TriggerID);
+                if (getTrigger.FoodID != modifiedTrial.FoodID){
+                    return BadRequest("The food ID on the trial does not match the food ID on the trigger");
+                }
+                if (getTrigger.ChildID !=  modifiedTrial.ChildID){
+                    return BadRequest("The ChildID on the trigger does not match the ChildID on the trial");
+                }
             }
 
             _context.Entry(modifiedTrial).State = EntityState.Modified;

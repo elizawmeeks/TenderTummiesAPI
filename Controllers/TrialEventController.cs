@@ -26,9 +26,9 @@ namespace TenderTummiesAPI.Controllers
 
         // GET METHOD
         //http://localhost:5000/TrialEvent/id will return a list of all TrialEvents for a certain trial. 
-        [HttpGet("{trialEventID}", Name = "GetTrialsTrialEvents")]
+        [HttpGet("{trialID}", Name = "GetTrialsTrialEvents")]
         
-        public IActionResult GetByTrial([FromRoute] int trialEventID)
+        public IActionResult GetByTrial([FromRoute] int trialID)
         {
             
             if (!ModelState.IsValid)
@@ -37,7 +37,7 @@ namespace TenderTummiesAPI.Controllers
             }
             
             IQueryable<TrialEvent> trialEvents = _context.TrialEvent
-                .Where(c => c.TrialEventID == trialEventID);
+                .Where(c => c.TrialID == trialID);
 
             if (trialEvents == null)
             {
@@ -120,15 +120,17 @@ namespace TenderTummiesAPI.Controllers
 
         // PUT 
          //http://localhost:5000/TrialEvent/{id} will edit a Trial event entry in the DB.  
-        [HttpPut("{id}")]
+        [HttpPut("id/{id}")]
         public IActionResult Put(int id, [FromBody] TrialEvent modifiedTrialEvent)
         {
+            modifiedTrialEvent.TrialEventID = id;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != modifiedTrialEvent.TrialID)
+            if (id != modifiedTrialEvent.TrialEventID)
             {
                 return BadRequest();
             }

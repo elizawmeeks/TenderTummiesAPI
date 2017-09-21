@@ -27,7 +27,7 @@ namespace TenderTummiesAPI.Controllers
         }
 
         // GET METHOD
-        //http://localhost:5000/Symptom/ will return a list of all Symptomren for a certain user. 
+        //http://localhost:5000/Symptom/ will return a list of all Symptoms
         [HttpGet]
         
         public IActionResult Get()
