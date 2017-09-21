@@ -123,7 +123,7 @@ namespace TenderTummiesAPI.Controllers
         //Helper method to check to see if a SafeID is already in the system
         private bool SafeExists(int safeID)
         {
-          return _context.Safe.Count(e => e.SafeID == safeID) > 0;
+          return _context.Safe.Any(e => e.SafeID == safeID);
         }
 
         // DELETE url/Safe/id/5
