@@ -12,7 +12,7 @@ It uses .NET Core and SQLite.
         * [For Windows Users](#for-windows-users)
     * [SQL Browser](#sql-browser)
     * [Visual Studio Code](#visual-studio-code)
-    * [Install .NET Core](#install-.net-core)
+    * [Install .NET Core](#install-net-core)
         * [Windows](#windows)
         * [OSX](#osx)
  * [Installing Tender Tummies API](#installing-tender-tummies-api)
@@ -29,8 +29,67 @@ It uses .NET Core and SQLite.
             * [Get All Food](#get-all-food)
             * [Get Single Food](#get-single-food)
         * [POST](#post) 
+    * [Ingestion Resource](#Ingestion-Resource)
+        * [GET](#GET)
+            * [Get All Ingestions](#get-all-ingestions)
+            * [Get Single Ingestion](#get-single-ingestion)
+    * [Safe Resource](#safe-resource)
+        * [GET](#get)
+            * [Get All of one Child's Safes](#get-all-of-one-childs-safes)
+            * [Get Single Safe](#get-single-safe)
+        * [POST](#post)
+        * [DELETE](#delete) 
+    * [Symptom Resource](#symptom-resource)
+        * [GET](#get)
+            * [Get All Symptoms](#get-all-symptoms)
+            * [Get Single Symptom](#get-single-symptom)
+        * [POST](#post)
+    * [Trigger Resource](#trigger-resource)
+        * [GET](#GET)
+            * [Get All Child's Triggers](#get-all-childs-triggers)
+            * [Get Single Trigger](#get-single-trigger)
+        * [POST](#post)
+            * [POST new Trigger](#post-new-trigger)
+            * [POST new Symptom to an existing Trigger](#post-new-symptom-to-an-existing-trigger)
+        * [DELETE](#delete)
+            * [DELETE entire Trigger and all associated Symptoms](#delete-entire-trigger-and-all-associated-symptoms)
+            * [DELETE a Single Symptom from a Trigger](#DELETE-a-single-Symptom-from-a-Trigger)
+    * [Reaction Resource](#reaction-resource)
+        * [GET](#get)
+            * [Get All Child's Reactions](#get-all-childs-reactions)
+            * [Get Single Reaction](#get-single-reaction)
+        * [POST](#post)
+            * [POST new Reaction](#post-new-reaction)
+            * [POST new Trigger to Existing Reaction](#post-new-trigger-to-existing-reaction)
+        * [PUT](#put)
+        * [DELETE](#delete)
+    * [Reaction Event Resource](#reaction-event-resource)
+        * [GET](#get)
+            * [GET All Reaction's Events](#get-all-reactions-events)
+            * [GET Single Reaction Event](#get-single-reaction-event)
+        * [POST](#post)
+            * [POST new Reaction Event](#post-new-reaction-event)
+            * [POST new Symptom to Existing Reaction Event](#post-new-symptom-to-existing-reaction-event)
+        * [PUT](#put)
+        * [DELETE](#delete)
+            * [DELETE Reaction Event and Associated Symptoms](#delete-reaction-event-and-associated-symptoms)
+            * [DELETE One Symptom from a Reaction Event](#delete-one-symptom-from-a-reaction-event)
+    * [Trial Resource](#trial-resource)
+        * [GET](#get)
+            * [Get All Child's Trials](#get-all-childs-trials)
+            * [Get Single Trial](#get-single-trait)
+        * [POST](#post)
+        * [PUT](#put)
+        * [DELETE](#delete)
+    * [Trial Event Resource](#trial-event-resource)
+        * [GET](#get)
+            * [GET All Trial's Events](#get-all-trials-events)
+            * [GET Single Trial Event](#get-single-trial-event)
+        * [POST](#post)
+        * [PUT](#put)
+        * [DELETE](#delete)
 
-        
+
 # Installing Core Technologies
 
 ## SQLite
@@ -257,7 +316,9 @@ Access a list of all of a particular child's triggers by running a GET call to `
 Get the information on a single trigger by running a GET call to ```http://localhost:5000/Trigger/id/{TriggerID}```.
 > Example: GET `http://localhost:5000/Trigger/id/1`
 
-### POST new Trigger
+### POST
+
+#### Post new Trigger
 POST a new trigger the child's associated symptoms by running a POST call to `http://localhost:5000/Trigger` using data from the following table.
 * Sample JSON: { "ChildID": 1, "FoodID": 1, "Severity": "Medium", "TriggerSymptomSubmissions": [{ "SymptomID":1, "Acute":"True", "Chronic":"False" }, { "SymptomID":2, "Acute":"False", "Chronic":"True" }] } 
 > Take Note: Trigger Symptom Submission is a type of object that has the following format: 
@@ -285,7 +346,7 @@ POST a new trigger the child's associated symptoms by running a POST call to `ht
 | Chronic   | Y        | Bool     | True    |
 
 
-### POST new Symptom to an existing Trigger
+#### POST new Symptom to an existing Trigger
 Add a symptom to an existing trigger by running a POST call to `http://localhost:5000/Trigger/Symptom` with the body of the request in the following format.
 * Sample JSON: { "TriggerID": 83, "SymptomID": 4, "Acute":"False", "Chronic":"True" }
 
@@ -322,7 +383,11 @@ Access a list of all of the reactions of a particular child by running a GET cal
 Get the information on a single reaction by running a GET call to ```http://localhost:5000/Reaction/id/{reactionID}```. This method will return an individual reaction with the trigger food(s) that caused the reaction nested inside.
 > Example: GET `http://localhost:5000/Reaction/id/1`
 
-### POST new Reaction
+
+
+### POST
+
+#### POST new Reaction
 POST a new reaction and the trigger(s) that caused it by running a POST call to `http://localhost:5000/Reaction` using data from the following table.
 * Sample JSON: { "ChildID": 1, "IngestionID": 1, "FoodType": "Chocolate Cake", "StartDate": "2017-1-16", "Description":"Sherman ate a bite of cake at a party", "TriggerIDs": [20,28,1,29] } 
 > Take Note: The trigger IDs are NOT the food IDs; the trigger IDs should be the IDs of child's triggers. The API validates whether or not the triggerID belongs to the specified child.
@@ -339,7 +404,7 @@ POST a new reaction and the trigger(s) that caused it by running a POST call to 
 | TriggerIDs  | Y        | Int[]     | [20, 28, 1, 29]                      |
 
 
-### POST new Trigger to Existing Reaction
+#### POST new Trigger to Existing Reaction
 Add a trigger to an existing reaction by running a POST call to `http://localhost:5000/Reaction/Trigger` with the body of the request in the following format.
 * Sample JSON: { "ReactionID": 3, "TriggerID": 4 }
 
@@ -503,7 +568,7 @@ These are the individual events in an ongoing trial. For example, a child might 
 
 ### GET 
 
-#### GET All Trials's Events
+#### GET All Trial's Events
 Access a list of all of the events of a particular trial by running a GET call to `http://localhost:5000/TrialEvent/{TrialID}`. This will return all of the trial events associated with a specific trial.
 > Example: To get all of Sherman's trial information make the call to `http://localhost:5000/TrialEvent/2`
 
