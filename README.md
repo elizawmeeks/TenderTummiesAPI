@@ -6,6 +6,7 @@ It uses .NET Core and SQLite.
 
 ## Table of Contents
 
+
   * [Installing Core Technologies](#installing-core-technologies)
     * [SQLite](#sqlite)
     	* [For OSX Users](#for-osx-users)
@@ -17,8 +18,8 @@ It uses .NET Core and SQLite.
         * [OSX](#osx)
  * [Installing Tender Tummies API](#installing-tender-tummies-api)
  * [Using Tender Tummies API](#using-tender-tummies-api)
-    * [Child Resource](#Child-Resource)
-        * [GET](#GET)
+    * [Child Resource](#child-resource)
+        * [GET](#get)
             * [Get All User's Children](#get-all-users-children)
             * [Get Single Child](#get-single-child)
         * [POST](#post)
@@ -29,8 +30,8 @@ It uses .NET Core and SQLite.
             * [Get All Food](#get-all-food)
             * [Get Single Food](#get-single-food)
         * [POST](#post) 
-    * [Ingestion Resource](#Ingestion-Resource)
-        * [GET](#GET)
+    * [Ingestion Resource](#ingestion-resource)
+        * [GET](#get)
             * [Get All Ingestions](#get-all-ingestions)
             * [Get Single Ingestion](#get-single-ingestion)
     * [Safe Resource](#safe-resource)
@@ -45,7 +46,7 @@ It uses .NET Core and SQLite.
             * [Get Single Symptom](#get-single-symptom)
         * [POST](#post)
     * [Trigger Resource](#trigger-resource)
-        * [GET](#GET)
+        * [GET](#get)
             * [Get All Child's Triggers](#get-all-childs-triggers)
             * [Get Single Trigger](#get-single-trigger)
         * [POST](#post)
@@ -53,7 +54,7 @@ It uses .NET Core and SQLite.
             * [POST new Symptom to an existing Trigger](#post-new-symptom-to-an-existing-trigger)
         * [DELETE](#delete)
             * [DELETE entire Trigger and all associated Symptoms](#delete-entire-trigger-and-all-associated-symptoms)
-            * [DELETE a Single Symptom from a Trigger](#DELETE-a-single-Symptom-from-a-Trigger)
+            * [DELETE a Single Symptom from a Trigger](#delete-a-single-symptom-from-a-trigger)
     * [Reaction Resource](#reaction-resource)
         * [GET](#get)
             * [Get All Child's Reactions](#get-all-childs-reactions)
