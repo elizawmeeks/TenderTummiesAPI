@@ -12,6 +12,23 @@ It uses .NET Core and SQLite.
   		* [For Windows Users](#for-windows-users)
   	* [SQL Browser](#sql-browser)
   	* [Visual Studio Code](#visual-studio-code)
+  	* [Install .NET Core](#install-.net-core)
+  		* [Windows](#windows)
+  		* [OSX](#osx)
+  * [Installing Tender Tummies API](#installing-tender-tummies-api)
+  * [Using Tender Tummies API](#using-tender-tummies-api)
+  	* [Child Resource](#Child-Resource)
+  		* [GET](#GET)
+  			* [Get All User's Children](#get-all-users-children)
+  			* [Get Single Child](#get-single-child)
+  		* [POST](#post)
+  		* [PUT](#put) 
+  		* [DELETE](#delete)
+  	* [Food Resource](#food-resource)
+  		* [GET](#get)
+  			* [Get All Food](#get-all-food)
+  			* [Get Single Food](#get-single-food)
+  		* [POST](#post) 
 
 # Installing Core Technologies
 
